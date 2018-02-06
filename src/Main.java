@@ -74,7 +74,6 @@ public class Main {
                                 while ((sCurrLine = br.readLine()).charAt(sCurrLine.length() - 1) == ';') ;
                                 specialInvalidity = true;
                             }
-                            System.out.println("Breaking");
                             break;
                         }
                     }
@@ -97,6 +96,23 @@ public class Main {
                         break;
                     }
 
+                    i++;
+                    /**
+                     * The string is stored in the sCurrLine. [sCurrLine = "int x = 0"]
+                     * I already have checked the return type and the variable type. ["int"]
+                     * The incrementation of i indicates the start of the variable name or function name.
+                     * Example:
+                     * int x = 0;
+                     * i is pointing at x already.
+                     *
+                     */
+                    if (type == Type.VARIABLE_DECLARATION) { // TODO VARIABLE DECLARATION (Ruffa, start here)
+
+                    } else if (type == Type.FUNCTION_DECLARATION) { // TODO FUNCTION DECLARATION (MM, start here)
+
+                    } else { // TODO FUNCTION DEFINITION (Vince, start here)
+
+                    }
                     // If this is not a function definition, end the process here.
                     if (type != Type.FUNCTION_DEFINITION) {
                         break;
