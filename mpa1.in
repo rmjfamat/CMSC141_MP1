@@ -1,12 +1,11 @@
-6
-int x, y, z = 10;
-double a
-int function();
-int func(int){
-int x = 10;
+1
+void      func   (   int  l, double c,
+
+
+
+
+
+ char C, long, int, long,             int i, char              m)        { int kurwae; pak ganern;
+
+
 }
-int square(int x){
-    return x * x;
-}
-INT function2(void);
-int solve(int,char,double x,float,int,int);
