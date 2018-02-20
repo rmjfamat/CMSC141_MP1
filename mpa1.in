@@ -1,5 +1,12 @@
-1
+2
 void disp ( int x, int y){
-    int x11 =                    'a'  +    'e'            ;
-    return y;
+    int int =                    'a'  +    'e'            ;
+    x11 = 'a'
+    + 'e' +
+
+
+     'i'
+     + 48 / '0';    return y +
+    'a'   ;
 }
+int kurwa (int, int, int, float float, int){}

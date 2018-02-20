@@ -219,7 +219,18 @@ public class Main {
                                             break;
                                         } else {
                                             if (!parameter_name.isEmpty()) {
-                                                fDef_DeclVar.add(parameter_name);
+                                                for (String s : dataTypes) {
+                                                    if (s.equals(parameter_name)) {
+                                                        valid = false;
+                                                        break;
+                                                    }
+                                                }
+                                                if (!valid || parameter_name.equals("void")) {
+                                                    System.out.println("Invalid name. Should not be a data type.");
+                                                    terminate();
+                                                } else {
+                                                    fDef_DeclVar.add(parameter_name);
+                                                }
                                             }
                                             System.out.println("Contents of variables declared: " );
                                             for (String s : fDef_DeclVar) {
@@ -330,8 +341,20 @@ public class Main {
                                                         System.out.println("Redeclaration of variable");
                                                         terminate();
                                                         break;
+                                                    } else {
+                                                        for (String s : dataTypes) {
+                                                            if (s.equals(identifier)) {
+                                                                valid = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                        if (!valid || identifier.equals("void")) {
+                                                            System.out.println("Invalid name. Should not be a data type.");
+                                                            terminate();
+                                                        } else {
+                                                            fDef_DeclVar.add(identifier);
+                                                        }
                                                     }
-                                                    fDef_DeclVar.add(identifier);
                                                 }
                                                 if (!((varDec && sCurrLine.charAt(0) == ';') || sCurrLine.charAt(0) == '=')) {
                                                     System.out.println("haha dude are you trying to make me laugh?");
