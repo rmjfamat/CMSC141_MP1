@@ -41,7 +41,7 @@ public class Main {
                 sCurrLine = "";
                 boolean testCaseSearch = true;
                 do {
-                    if (readLine.length() == 0) {
+                    while (readLine.length() == 0) {
                         sCurrLine = sCurrLine.concat(" ");
                         readLine = br.readLine();
                     }
@@ -239,10 +239,11 @@ public class Main {
                                     }
                                 }
                                 if (valid) {
-                                    System.out.println("Readline's content: " + readLine);
                                     while (readLine.isEmpty()) {
                                         readLine = br.readLine();
                                     }
+                                    System.out.println("Readline's content: " + readLine);
+                                    readLine = readLine.trim();
                                     while (valid && readLine.charAt(0) != '}') {
                                         sCurrLine = "";
                                         readLine = readLine.trim();
@@ -252,7 +253,8 @@ public class Main {
                                         for (i = 0; readLine.charAt(0) != ';'; i++) {
                                             sCurrLine = sCurrLine.concat(readLine.charAt(0) + "");
                                             readLine = readLine.substring(1);
-                                            if (readLine.isEmpty()) {
+                                            while (readLine.isEmpty()) {
+                                                //System.out.println("Empty. Finding next.");
                                                 readLine = br.readLine();
                                             }
                                         }
@@ -386,19 +388,44 @@ public class Main {
                                                     System.out.println(sCurrLine + "(!)");
                                                     operationDetected = false;
                                                 } catch (NumberFormatException e) { // Returned is not a number.
-                                                    boolean variableExists = false;
-                                                    for (String s : fDef_DeclVar) {
-                                                        if (s.equals(returning)) {
-                                                            variableExists = true;
+                                                    if (returning.contains("'")) { // Might be a character...
+                                                        if (returning.length() <= 2 || returning.length() >= 5) {
+                                                            System.out.println("Too much or too less character.");
+                                                            terminate();
+                                                            break;
                                                         }
-                                                    }
-                                                    if (!variableExists) {
-                                                        System.out.println("Return value is non-existent: " + returning);
-                                                        terminate();
-                                                        break;
-                                                    }
-                                                    if (!returning.isEmpty()) {
+                                                        int quoteCtr = 0;
+                                                        for (int j = 0; j < returning.length(); j++) {
+                                                            if (returning.charAt(j) == '\'') {
+                                                                quoteCtr++;
+                                                            }
+                                                        }
+                                                        if (quoteCtr != 2) {
+                                                            System.out.println("Quotes must be two.");
+                                                            terminate();
+                                                            break;
+                                                        }
+                                                        if (returning.length() == 4 && !returning.contains("\\")) {
+                                                            System.out.println("Special case is not met.");
+                                                            terminate();
+                                                            break;
+                                                        }
                                                         operationDetected = false;
+                                                    } else {
+                                                        boolean variableExists = false;
+                                                        for (String s : fDef_DeclVar) {
+                                                            if (s.equals(returning)) {
+                                                                variableExists = true;
+                                                            }
+                                                        }
+                                                        if (!variableExists) {
+                                                            System.out.println("Return value is non-existent: " + returning);
+                                                            terminate();
+                                                            break;
+                                                        }
+                                                        if (!returning.isEmpty()) {
+                                                            operationDetected = false;
+                                                        }
                                                     }
                                                 }
                                                 sCurrLine = sCurrLine.trim();
@@ -468,10 +495,10 @@ public class Main {
             valid = false;
             wr.append("INVALID FUNCTION DEFINITION");
             System.out.println(readLine + " is readline");
-            if (readLine.length() == 0) {
+            while (readLine.length() == 0) {
                 readLine = br.readLine();
             }
-            while (readLine != null && readLine.charAt(0) != '}') {
+            while (readLine.charAt(0) != '}') {
                 readLine = readLine.substring(1);
                 while (readLine.length() == 0) {
                     readLine = br.readLine();
