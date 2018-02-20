@@ -171,11 +171,11 @@ public class Main {
                                         System.out.println(sCurrLine.charAt(i) + " inserted");
                                     }
                                     param = param.trim();
-                                    if (param.length() == 0) {
+                                    if (param.length() == 0 && sCurrLine.charAt(i) != ')') {
                                         System.out.println("Hmm. Something's not right.");
                                         terminate();
                                         break;
-                                    } else {
+                                    } else if (sCurrLine.charAt(i) != ')' || param.length() > 0){
 
                                         boolean param_type = false;
                                         String parameter_type = "";
@@ -473,7 +473,7 @@ public class Main {
             }
             while (readLine != null && readLine.charAt(0) != '}') {
                 readLine = readLine.substring(1);
-                if (readLine.length() == 0) {
+                while (readLine.length() == 0) {
                     readLine = br.readLine();
                 }
             }

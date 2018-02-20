@@ -1,15 +1,5 @@
-2
-void      a9 (int  l,double c,char C, long, int, long,             int i, char              m)
- {
- int kurwae;
- return ((26 +C) + l + C) + m+         15; kurwae = kurwae + 26    ; int 9blah = 45;
- }
-void      aa (int  l,double c,char C, long, int, long,             int i, char              m)
- {
- int kurwae;
- return ((26 +C) + l + C) + m+         15; kurwae =
- kurwae + 26    ; int blah = 45;
- }
+1
+int display(    ){
+    return 1;
 
-
-
+    }
