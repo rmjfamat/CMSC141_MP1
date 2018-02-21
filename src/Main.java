@@ -129,8 +129,117 @@ public class Main {
                  *
                  */
                 if (type == Type.VARIABLE_DECLARATION) { // TODO VARIABLE DECLARATION (Ruffa, start here)
+                    
 
                 } else if (type == Type.FUNCTION_DECLARATION) { // TODO FUNCTION DECLARATION (MM, start here)
+                    System.out.println("nisulod sa function declaration");
+
+                    for (; sCurrLine.charAt(i) == ' '; i++);
+
+                    if (!(sCurrLine.charAt(i) == '_' || (sCurrLine.charAt(i) >= 'A' && sCurrLine.charAt(i) <= 'Z') || (sCurrLine.charAt(i) >= 'a' && sCurrLine.charAt(i) <= 'z'))) {
+                        //terminate(type);
+                        valid = false;
+                        System.out.println("Naming deficiency at first letter.");
+                    } else {
+                        String functionName = sCurrLine.charAt(i) + ""; //istore sa functionName ang kana na character
+
+                        for (i++; sCurrLine.charAt(i) != '(' && sCurrLine.charAt(i) != ' '; i++) { //name ra jud ni sa function way apil ang after sa parenthesis
+                            if (sCurrLine.charAt(i) == '_' || (sCurrLine.charAt(i) >= 'A' && sCurrLine.charAt(i) <= 'Z') || (sCurrLine.charAt(i) >= 'a' && sCurrLine.charAt(i) <= 'z') || (sCurrLine.charAt(i) >= '0' && sCurrLine.charAt(i) <= '9')) {
+                                functionName = functionName.concat(sCurrLine.charAt(i) + "");
+                                //System.out.println("mm " + functionName);
+                            } else {
+                                System.out.println("Naming deficiency at next letters: " + sCurrLine.charAt(i));
+                                //terminate(type);
+                                valid = false;
+                                break;
+                            }
+                            //System.out.println(i);
+                        }
+
+                        //mana ko here
+                        if (valid) { //valid ang pag name sa function;
+                            System.out.println("Function name cleared.");
+                            for (; sCurrLine.charAt(i) != '('; i++){
+                                if (i + 1 == sCurrLine.length()) {
+                                    System.out.println("invalid");
+                                    //terminate(type);
+                                    valid = false;
+                                    break;
+                                } else if (sCurrLine.charAt(i) != ' ') {
+                                    System.out.println("Invalid function name.");
+                                    //terminate(type);
+                                    valid = false;
+                                    break;
+                                }
+                            }
+
+                            if (valid){ //ang scurrLine kay naa na sa (
+                                while (sCurrLine.charAt(i) != ')'){
+                                    System.out.println(sCurrLine.charAt(i));
+
+                                    String param = "";
+                                        for (i++; sCurrLine.charAt(i) != ',' && sCurrLine.charAt(i) != ')'; i++){
+                                            param = param.concat(sCurrLine.charAt(i) + "");
+                                            System.out.println(sCurrLine.charAt(i) + " inserted");
+
+                                        }
+                                        System.out.println("param: " + param);
+                                        param = param.trim();
+
+                                        System.out.println(param.substring(0) + " idk");
+                                        boolean parameterType = false;
+                                        String parameter = "";
+                                        while (param.length() > 0 && param.charAt(0) != ' '){
+                                            parameter = parameter.concat(param.charAt(0) + "");
+                                            param = param.substring(1);
+                                        }
+
+                                        if (param.length() == 0 && sCurrLine.charAt(i) != ')'){
+                                            System.out.println("hello");
+                                            valid = false;
+                                            break;
+                                        }
+
+                                    System.out.println("param2: " + param);
+                                    System.out.println("parameter " + parameter);
+
+
+                                        parameter = parameter.trim();
+                                        for (String string : dataTypes) { //check if the parameter is valid
+                                            if (parameter.equals(string)){
+                                                parameterType = true;
+                                                break;
+                                            }else {
+                                                if (parameter.length() == 0){ //if no parameter
+                                                    parameterType = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        if (!parameterType){
+                                            System.out.println("error " + parameter);
+                                            valid = false;
+                                            break;
+                                        }
+
+                                        if (param.length() > 0 && (param.charAt(1) >= '0' && param.charAt(1) <= '9')){
+                                            System.out.println("di pwede number");
+                                            valid = false;
+                                            break;
+                                        }
+
+                                        //param = param.trim();
+                                        for (String string : dataTypes){
+                                            if (string.equals(param)){
+                                                valid = false;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
                 } else { // TODO FUNCTION DEFINITION (Vince, start here)
                     System.out.println("Staring");
